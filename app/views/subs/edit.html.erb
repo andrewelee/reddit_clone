@@ -1,0 +1,25 @@
+<h1>Edit Sub</h1>
+
+<% if flash[:errors] %>
+  <% flash[:errors].each do |error| %>
+    <%= error %>
+  <% end %>
+<% end %>
+
+<form action="<%= edit_sub_url(@sub) %>" method="post">
+  <input type="hidden" name="_method" value="patch">
+  <%= auth_token %>
+
+  <label>
+    Title
+    <input type="text" name="sub[title]" value="<%= @sub.title%>"%>
+  </label>
+
+  <label>
+    Description
+    <input type="textarea" name="sub[title]" value="<%= @sub.description %>">
+  </label>
+
+  <button>Edit sub</button>
+
+</form>
