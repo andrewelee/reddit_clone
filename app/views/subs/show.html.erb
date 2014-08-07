@@ -1,3 +1,28 @@
 <h1><%=@sub.title%></h1>
 
+<h2>Posts:</h2>
+<ul>
+<% @sub.posts.each do |post|%>
+  <li>
+    <a href="<%= post_url(post) %>"><%= post.title %></a> |
+    <%= post.karma %>
+  </li>
+  <form action="<%= upvote_url %>" method="post">
+    <%= auth_token %>
+    <input type="hidden" name="vote[voteable_id]" value="<%=post.id%>">
+    <input type="hidden" name="vote[voteable_type]" value="Post">
+    <button>Upvote</button>
+  </form>
+  <form action="<%= downvote_url %>" method="post">
+    <%= auth_token %>
+    <input type="hidden" name="vote[voteable_id]" value="<%=post.id%>">
+    <input type="hidden" name="vote[voteable_type]" value="Post">
+    <button>Downvote</button>
+  </form>
+
+
+<% end %>
+</ul>
+
 <a href="<%= new_post_url %>">Create New Post</a>
+

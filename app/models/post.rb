@@ -34,12 +34,22 @@ class Post < ActiveRecord::Base
     primary_key: :id
   )
 
+  has_many :votes, as: :voteable
+
   def comments_by_parent_id
     result = Hash.new {|hash, key| hash[key] = []}
     self.comments.each do |comment|
       result[comment.parent_comment_id] << comment
     end
     result
+  end
+
+  def karma
+    karma = 0
+    self.votes.each do |vote|
+      karma += vote.value
+    end
+    karma
   end
 
 end

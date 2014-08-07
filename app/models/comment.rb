@@ -31,4 +31,6 @@ class Comment < ActiveRecord::Base
     primary_key: :id
   )
 
+  has_many :votes, as: :voteable
+
 end
