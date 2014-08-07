@@ -3,7 +3,12 @@ Rails.application.routes.draw do
   resources :users
   resource :session
   resources :subs, except: [:destroy]
-  resources :posts, except: [:index]
+  resources :posts, except: [:index] do
+    resources :comments, only: [:new, :create]
+  end
+  resources :comments, only: [:index] do
+    resources :comments, only: [:new, :create]
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

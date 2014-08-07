@@ -1,0 +1,13 @@
+<ul>
+<% @comments[c1.id].each do |c2| %>
+    <% if c2.parent_comment_id == c1.id %>
+        <li><%= c2.content %> |
+        <%= c2.author.username%> |
+        <%= c2.created_at%>
+        </li>
+       <a href="<%= new_comment_comment_url(c2) %>">Reply</a>
+      <%= render "comments", c1: c2 %>
+    <% end %>
+
+<% end %>
+</ul>

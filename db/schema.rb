@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140807153243) do
+ActiveRecord::Schema.define(version: 20140807193821) do
 
   create_table "comments", force: true do |t|
     t.text     "content",           null: false
@@ -20,6 +20,8 @@ ActiveRecord::Schema.define(version: 20140807153243) do
     t.integer  "parent_comment_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "commentable_type"
+    t.integer  "commentable_id"
   end
 
   create_table "post_subs", force: true do |t|
@@ -57,5 +59,13 @@ ActiveRecord::Schema.define(version: 20140807153243) do
   end
 
   add_index "users", ["username"], name: "index_users_on_username", unique: true
+
+  create_table "votes", force: true do |t|
+    t.integer  "value",         null: false
+    t.string   "voteable_type", null: false
+    t.integer  "voteable_id",   null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

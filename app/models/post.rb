@@ -17,6 +17,29 @@ class Post < ActiveRecord::Base
     primary_key: :id
   )
 
+  has_many(
+    :top_level_comments,
+    -> { where("parent_comment_id IS NULL") }, as: :commentable,
+    class_name: "Comment",
+    foreign_key: :post_id,
+    primary_key: :id
+  )
+
   has_many :subs, through: :post_subs, source: :sub
+
+  has_many(
+    :comments,
+    class_name: "Comment",
+    foreign_key: :post_id,
+    primary_key: :id
+  )
+
+  def comments_by_parent_id
+    result = Hash.new {|hash, key| hash[key] = []}
+    self.comments.each do |comment|
+      result[comment.parent_comment_id] << comment
+    end
+    result
+  end
 
 end

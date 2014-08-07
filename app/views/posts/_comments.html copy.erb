@@ -1,0 +1,11 @@
+<ul>
+<% comments.each do |comment| %>
+  <li>
+    <%= comment.content %>
+    <% if comment.child_comments %>
+      <%= render "comments", comments: comment.child_comments %>
+    <% end %>
+    <a href="<%= new_comment_comment_url(comment) %>">Reply</a>
+  </li>
+<% end %>
+</ul>

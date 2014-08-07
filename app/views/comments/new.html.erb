@@ -1,0 +1,21 @@
+<% action = ( @parent.class == Post ? post_comments_url(@parent) : comment_comments_url(@parent)) %>
+
+<h1>New Comment</h1>
+
+<% if flash[:errors] %>
+  <% flash[:errors].each do |error| %>
+    <%= error %>
+  <% end %>
+<% end %>
+
+<form action="<%= action %>" method="post">
+  <%= auth_token %>
+
+  <label>
+    Content
+    <input type="textarea" name="comment[content]" value="<%= @comment.content %>"%>
+  </label>
+
+  <button>Submit New Comment</button>
+
+</form>
