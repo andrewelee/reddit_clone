@@ -11,10 +11,18 @@ class Sub < ActiveRecord::Base
 
   has_many(
     :posts,
-    class_name: "Post",
-    foreign_key: :sub_id,
-    primary_key: :id
+    through: :post_subs,
+    source: :post
   )
+
+  has_many(
+    :post_subs,
+    class_name: "PostSub",
+    foreign_key: :sub_id,
+    primary_key: :id,
+    inverse_of: :sub
+  )
+
 
 
 end

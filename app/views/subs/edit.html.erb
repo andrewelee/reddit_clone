@@ -6,7 +6,7 @@
   <% end %>
 <% end %>
 
-<form action="<%= edit_sub_url(@sub) %>" method="post">
+<form action="<%= sub_url(@sub) %>" method="post">
   <input type="hidden" name="_method" value="patch">
   <%= auth_token %>
 

@@ -1,0 +1,38 @@
+<h1>Create Post</h1>
+
+<% if flash[:errors] %>
+  <% flash[:errors].each do |error| %>
+    <%= error %>
+  <% end %>
+<% end %>
+
+<form action="<%= posts_url %>" method="post">
+  <%= auth_token %>
+
+  <label>
+    Title
+    <input type="text" name="post[title]" value="<%= @post.title%>"%>
+  </label>
+
+  <label>
+    URL
+    <input type="text" name="post[url]" value="<%= @post.url%>"%>
+  </label>
+
+  <label>
+    Content
+    <input type="textarea" name="post[content]" value="<%= @post.content %>">
+  </label>
+
+  <label>
+    Subs
+    <% Sub.all.each do |sub| %>
+      <%= sub.title %>
+      <input type="checkbox" name="post[sub_ids][]" value="<%= sub.id %>"
+      <%= "checked" if @post.sub_ids.include?(sub.id) %>>
+    <% end %>
+  </label>
+
+  <button>Create Post</button>
+
+</form>

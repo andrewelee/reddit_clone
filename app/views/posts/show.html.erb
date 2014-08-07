@@ -1,0 +1,14 @@
+<h1><%= @post.title %></h1>
+
+<a href="<%= edit_post_url(@post) %>">Edit Post</a>
+
+<h2>Subs</h2>
+<ul>
+  <% @subs.each do |sub| %>
+  <li>
+    <%= sub.title %>
+  </li>
+  <% end %>
+</ul>
+
+<a href="<%= user_url(@post.author) %>">Back to User</a>

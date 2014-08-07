@@ -1,12 +1,13 @@
 class Post < ActiveRecord::Base
 
-  validates :title, :sub_id, :author_id, presence: true
+  validates :title, :author_id, presence: true
 
   has_many(
-    :sub_posts,
+    :post_subs,
     class_name: "PostSub",
     foreign_key: :post_id,
-    primary_key: :id
+    primary_key: :id,
+    inverse_of: :post
   )
 
   belongs_to(
@@ -16,6 +17,6 @@ class Post < ActiveRecord::Base
     primary_key: :id
   )
 
-  has_many :subs, through: :sub_posts, source: :sub
+  has_many :subs, through: :post_subs, source: :sub
 
 end

@@ -1,0 +1,40 @@
+<h1>Edit Post</h1>
+
+<% if flash[:errors] %>
+  <% flash[:errors].each do |error| %>
+    <%= error %>
+  <% end %>
+<% end %>
+
+<form action="<%= post_url(@post) %>" method="post">
+  <input type="hidden" name="_method" value="put">
+  <%= auth_token %>
+  <input type="hidden" name="post[sub_ids][]" value="">
+
+  <label>
+    Title
+    <input type="text" name="post[title]" value="<%= @post.title%>"%>
+  </label>
+
+  <label>
+    URL
+    <input type="text" name="post[url]" value="<%= @post.url%>"%>
+  </label>
+
+  <label>
+    Content
+    <input type="textarea" name="post[content]" value="<%= @post.content %>">
+  </label>
+
+  <label>
+    Subs
+    <% Sub.all.each do |sub| %>
+      <%= sub.title %>
+      <input type="checkbox" name="post[sub_ids][]" value="<%= sub.id %>"
+      <%= "checked" if @post.sub_ids.include?(sub.id) %>>
+    <% end %>
+  </label>
+
+  <button>Update Post</button>
+
+</form>
